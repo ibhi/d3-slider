@@ -5,13 +5,13 @@ var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 var PRODUCTION = process.env.NODE_ENV === 'production';
 var DEVELOPMENT = process.env.NODE_ENV === 'development';
-
+console.log('Production ', PRODUCTION, DEVELOPMENT);
 var entry = PRODUCTION
-    ? ['./d3.slider.js']
+    ? ['./index.js']
     : [
-        './d3.slider.js',
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080'
+        './index.js',
+        // 'webpack/hot/dev-server',
+        // 'webpack-dev-server/client?http://localhost:8080'
     ];
 
 var sourcemap = PRODUCTION ? '' : 'source-map';
@@ -52,12 +52,12 @@ module.exports = {
     plugins: plugins,
     module: {
         rules: [
-            {
-                enforce: 'pre',
-                test: /\.js$/, // include .js files
-                exclude: /node_modules/, // exclude any and all files in the node_modules folder
-                loader: 'eslint-loader',
-            },
+            // {
+            //     enforce: 'pre',
+            //     test: /\.js$/, // include .js files
+            //     exclude: /node_modules/, // exclude any and all files in the node_modules folder
+            //     loader: 'eslint-loader',
+            // },
             {
                 test: /.\js$/,
                 use: {
@@ -98,8 +98,8 @@ module.exports = {
         ]
     },
     output: {
-        path: path.join(__dirname, './dist'),
+        path: path.join(__dirname, '/dist'),
         publicPath: PRODUCTION ? '/' : '/dist/',
-        filename: PRODUCTION ? 'bundle-[hash:12].min.js' : 'bundle.js'
+        filename: PRODUCTION ? 'd3-slider-[hash:12].min.js' : 'd3-slider.js'
     },
 };

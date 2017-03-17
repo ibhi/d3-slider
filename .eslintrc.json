@@ -1,0 +1,15 @@
+{
+  "rules": {
+    "semi": 0,
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "space-before-function-paren": 0
+  },
+  "extends": "standard",
+  "plugins": [
+    "standard",
+    "promise"
+  ]
+}
