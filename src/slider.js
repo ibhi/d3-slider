@@ -121,16 +121,20 @@ export default function module() {
       }
 
       function createAxis(dom) {
+        let axisOrient;
         // Create axis if not defined by user
         if (typeof axis === 'boolean') {
           if (orientation === 'horizontal') {
+            console.log(Math.round(sliderLength / 100));
             axis = axisBottom()
               .ticks(Math.round(sliderLength / 100))
-              .tickFormat(tickFormat);
+              // .tickFormat(tickFormat);
+            axisOrient = 'bottom'
           } else {
             axis = axisRight()
               .ticks(Math.round(sliderLength / 100))
               .tickFormat(tickFormat);
+            axisOrient = 'right';
           }
         }
 
@@ -140,7 +144,7 @@ export default function module() {
 
         // Create SVG axis container
         var svg = dom.append('svg')
-          .classed('d3-slider-axis d3-slider-axis-' + axis.orient(), true)
+          .classed('d3-slider-axis d3-slider-axis-' + axisOrient, true)
           .on('click', stopPropagation);
 
         var g = svg.append('g');
@@ -153,13 +157,14 @@ export default function module() {
             width: sliderLength + margin * 2,
             height: margin
           });
+          g.attr('transform', 'translate(' + margin + ',0)');
 
-          if (axis.orient() === 'top') {
-            svg.style('top', -margin + 'px');
-            g.attr('transform', 'translate(' + margin + ',' + margin + ')');
-          } else { // bottom
-            g.attr('transform', 'translate(' + margin + ',0)');
-          }
+          // if (axis.orient() === 'top') {
+          //   svg.style('top', -margin + 'px');
+          //   g.attr('transform', 'translate(' + margin + ',' + margin + ')');
+          // } else { // bottom
+          //   g.attr('transform', 'translate(' + margin + ',0)');
+          // }
         } else { // Vertical
           svg.style('top', -margin + 'px');
 
