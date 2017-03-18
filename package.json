@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/turban/d3.slider",
   "dependencies": {
+    "d3-axis": "^1.0.6",
     "d3-dispatch": "^1.0.3",
     "d3-drag": "^1.0.4",
     "d3-format": "^1.1.1",
     "d3-interpolate": "^1.1.4",
     "d3-scale": "^1.0.5",
-    "d3-selection": "^1.0.5"
+    "d3-selection": "^1.0.5",
+    "d3-transition": "^1.0.4"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",

@@ -10,8 +10,8 @@ var entry = PRODUCTION
     ? ['./index.js']
     : [
         './index.js',
-        // 'webpack/hot/dev-server',
-        // 'webpack-dev-server/client?http://localhost:8080'
+        'webpack/hot/dev-server',
+        'webpack-dev-server/client?http://localhost:8080'
     ];
 
 var sourcemap = PRODUCTION ? '' : 'source-map';
@@ -34,7 +34,11 @@ var plugins = PRODUCTION
         })
     ]
     : [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin('style-[hash:12].css'),
+        new HTMLWebpackPlugin({
+            template: 'index-template.html'
+        }),
     ];
 
 plugins.push();
@@ -52,12 +56,12 @@ module.exports = {
     plugins: plugins,
     module: {
         rules: [
-            // {
-            //     enforce: 'pre',
-            //     test: /\.js$/, // include .js files
-            //     exclude: /node_modules/, // exclude any and all files in the node_modules folder
-            //     loader: 'eslint-loader',
-            // },
+            {
+                enforce: 'pre',
+                test: /\.js$/, // include .js files
+                exclude: /node_modules/, // exclude any and all files in the node_modules folder
+                loader: 'eslint-loader',
+            },
             {
                 test: /.\js$/,
                 use: {
