@@ -97,9 +97,9 @@ export default function module() {
       } else { // Vertical
         div.on('click', onClickVertical);
         drag.on('drag', onDragVertical);
-        if (toType(value) === 'array' && value.length === 2) {
-          divRange = select(this).append('div').classed('d3-slider-range-vertical', true);
+        divRange = select(this).append('div').classed('d3-slider-range-vertical', true);
 
+        if (toType(value) === 'array' && value.length === 2) {
           handle1.style('bottom', formatPercent(scale(value[0])));
           divRange.style('bottom', formatPercent(scale(value[0])));
           drag.on('drag', onDragVertical);
@@ -110,6 +110,8 @@ export default function module() {
           drag.on('drag', onDragVertical);
         } else {
           handle1.style('bottom', formatPercent(scale(value)));
+          divRange.style('bottom', formatPercent(scale(0)));
+          divRange.style('top', formatPercent(scale(value)));
           drag.on('drag', onDragVertical);
         }
 
@@ -125,11 +127,12 @@ export default function module() {
         // Create axis if not defined by user
         if (typeof axis === 'boolean') {
           if (orientation === 'horizontal') {
-            console.log(Math.round(sliderLength / 100));
+            // console.log(Math.round(sliderLength / 100));
             axis = axisBottom()
               .ticks(Math.round(sliderLength / 100))
               // .tickFormat(tickFormat);
-            axisOrient = 'bottom'
+            axisOrient = 'bottom';
+            console.log(axis.orient);
           } else {
             axis = axisRight()
               .ticks(Math.round(sliderLength / 100))
@@ -153,10 +156,9 @@ export default function module() {
         if (orientation === 'horizontal') {
           svg.style('margin-left', -margin + 'px');
 
-          svg.attr({
-            width: sliderLength + margin * 2,
-            height: margin
-          });
+          svg
+            .attr('width', sliderLength + margin * 2)
+            .attr('height', margin);
           g.attr('transform', 'translate(' + margin + ',0)');
 
           // if (axis.orient() === 'top') {
@@ -168,17 +170,16 @@ export default function module() {
         } else { // Vertical
           svg.style('top', -margin + 'px');
 
-          svg.attr({
-            width: margin,
-            height: sliderLength + margin * 2
-          });
+          svg
+            .attr('width', margin)
+            .attr('height', sliderLength + margin * 2);
 
-          if (axis.orient() === 'left') {
-            svg.style('left', -margin + 'px');
-            g.attr('transform', 'translate(' + margin + ',' + margin + ')');
-          } else { // right
-            g.attr('transform', 'translate(' + 0 + ',' + margin + ')');
-          }
+          // if (axis.orient() === 'left') {
+          //   svg.style('left', -margin + 'px');
+          //   g.attr('transform', 'translate(' + margin + ',' + margin + ')');
+          // } else { // right
+          //   g.attr('transform', 'translate(' + 0 + ',' + margin + ')');
+          // }
         }
         g.call(axis);
       }

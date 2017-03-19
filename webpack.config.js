@@ -34,11 +34,7 @@ var plugins = PRODUCTION
         })
     ]
     : [
-        new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('style-[hash:12].css'),
-        new HTMLWebpackPlugin({
-            template: 'index-template.html'
-        }),
+        new webpack.HotModuleReplacementPlugin()
     ];
 
 plugins.push();
