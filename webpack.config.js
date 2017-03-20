@@ -100,6 +100,6 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/dist'),
         publicPath: PRODUCTION ? '/' : '/dist/',
-        filename: PRODUCTION ? 'd3-slider-[hash:12].min.js' : 'd3-slider.js'
+        filename: PRODUCTION ? '[chunkhash].[name].min.js' : 'd3-slider.js'
     },
 };
