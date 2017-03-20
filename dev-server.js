@@ -6,10 +6,10 @@ var path = require('path');
 var compiler = webpack(config);
 var server = new WebpackDevServer(compiler, {
 	hot: true,
-	filename: config.output.filename,
+	// filename: config.output.filename,
 	publicPath: config.output.publicPath,
-	stats: {
-		colors: true
-	}
+	contentBase: config.output.path,
+	compress: true,
+	stats: 'errors-only'
 });
 server.listen(8080, 'localhost', function() {});

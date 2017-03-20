@@ -4,14 +4,12 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 var PRODUCTION = process.env.NODE_ENV === 'production';
-var DEVELOPMENT = process.env.NODE_ENV === 'development';
-console.log('Production ', PRODUCTION, DEVELOPMENT);
 var entry = PRODUCTION
     ? ['./index.js']
     : [
-        './index.js',
         'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080'
+        'webpack-dev-server/client?http://localhost:8080',
+        './index.js'
     ];
 
 var sourcemap = PRODUCTION ? '' : 'source-map';
@@ -34,17 +32,21 @@ var plugins = PRODUCTION
         })
     ]
     : [
-        new webpack.HotModuleReplacementPlugin()
+        new HTMLWebpackPlugin({
+            template: 'index-template.html'
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
     ];
 
 plugins.push();
 
 var cssLoader = PRODUCTION
     ? ExtractTextPlugin.extract({
-        loader: 'css-loader?minimize&colormin!sass-loader',
-        fallbackLoader: 'style-loader'
+        use: ['css-loader?minimize&colormin', 'sass-loader'],
+        fallback: 'style-loader'
     })
-    : 'style-loader!css-loader!sass-loader';
+    : ['style-loader', 'css-loader', 'sass-loader'];
 
 module.exports = {
     devtool: sourcemap,
@@ -56,7 +58,7 @@ module.exports = {
                 enforce: 'pre',
                 test: /\.js$/, // include .js files
                 exclude: /node_modules/, // exclude any and all files in the node_modules folder
-                loader: 'eslint-loader',
+                use: 'eslint-loader',
             },
             {
                 test: /.\js$/,
@@ -87,19 +89,19 @@ module.exports = {
             },
             {
                 test: /.\html$/,
-                loader: 'raw-loader',
+                use: 'raw-loader',
                 exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
-                loader: cssLoader,
+                use: cssLoader,
                 exclude: /node_modules/
             },
         ]
     },
     output: {
         path: path.join(__dirname, '/dist'),
-        publicPath: PRODUCTION ? '/' : '/dist/',
+        publicPath: '/',
         filename: PRODUCTION ? '[chunkhash].[name].min.js' : 'd3-slider.js'
     },
 };
