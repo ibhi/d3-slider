@@ -1,6 +1,19 @@
 D3.js Slider
 ============
 
-This is a pure D3.js slider inspired by the <a href="">jQuery UI Slider</a>. Supports <a href="https://github.com/mbostock/d3/wiki/SVG-Axes">D3’s axis component</a>. Feel free to contribute!
+This is a pure D3.js slider inspired by the [d3-slider](https://github.com/MasterMaps/d3-slider). 
 
-<a href="http://thematicmapping.org/playground/d3/d3.slider/">Examples</a>
+TODO: Update README.md with API documentation and examples
+
+**Development**
+To build the code 
+
+1. Clone the GIT repository
+2. `npm install`
+3. `npm run dev` to run the webpack dev server with live reloading
+4. `npm run build` to get the production build in `dist` folder
+
+
+
+
+
