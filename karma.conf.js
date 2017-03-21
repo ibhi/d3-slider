@@ -1,6 +1,7 @@
 // Karma configuration
 // Generated on Tue Mar 21 2017 20:58:35 GMT+0530 (IST)
 let webpackConfig = require('./webpack.config');
+let path = require('path');
 
 module.exports = function(config) {
   config.set({
@@ -16,7 +17,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      './test/**/*.spec.js'
+      './test/index.spec.js'
     ],
 
 
@@ -28,8 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      './index.js': ['webpack', 'sourcemap'],
-      './tests/**/*.spec.js': ['babel']
+      './test/index.spec.js': ['webpack', 'sourcemap'],
     },
 
     webpack: webpackConfig,
@@ -37,8 +37,30 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage-istanbul'],
 
+    coverageIstanbulReporter: {
+
+       // reports can be any that are listed here: https://github.com/istanbuljs/istanbul-reports/tree/590e6b0089f67b723a1fdf57bc7ccc080ff189d7/lib
+      reports: ['html', 'lcovonly', 'text-summary'],
+
+       // base output directory. If you include %browser% in the path it will be replaced with the karma browser name
+      dir: path.join(__dirname, '.coverage'),
+
+       // if using webpack and pre-loaders, work around webpack breaking the source path
+      fixWebpackSourcePaths: true,
+
+       // Most reporters accept additional config options. You can pass these through the `report-config` option
+      'report-config': {
+
+        // all options available at: https://github.com/istanbuljs/istanbul-reports/blob/590e6b0089f67b723a1fdf57bc7ccc080ff189d7/lib/html/index.js#L135-L137
+        html: {
+          // outputs the report in ./coverage/html
+          subdir: 'html'
+        }
+
+      }
+    },
 
     // web server port
     port: 9876,

@@ -1,4 +1,4 @@
-// export { default as slider } from './src/slider';
+export { default as slider } from './src/slider';
 import './src/slider.scss';
 // import { scaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';

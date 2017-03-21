@@ -77,6 +77,12 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                enforce: 'post',
+                test: /src\/+\.js$/,
+                use: 'istanbul-instrument-loader',
+                exclude: /(node_modules|\.spec\.js$)/
+            },
+            {
                 test: /\.(png|jpg|gif)$/,
                 use: {
                     loader: 'url-loader',
