@@ -76,6 +76,23 @@ module.exports = {
                 },
                 exclude: /node_modules/
             },
+            // {
+            //     enforce: 'post',
+            //     test: /src\/+\.js$/,
+            //     use: 'istanbul-instrument-loader',
+            //     exclude: /(node_modules|\.spec\.js$)/
+            // },
+            {
+                test: /\.js$/,
+                enforce: 'post',
+                include: path.resolve('src/'),
+                use: {
+                    loader: 'istanbul-instrumenter-loader',
+                    options: {
+                        esModules: true
+                    }
+                }
+            },
             {
                 test: /\.(png|jpg|gif)$/,
                 use: {

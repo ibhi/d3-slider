@@ -8,8 +8,12 @@
     "space-before-function-paren": 0
   },
   "extends": "standard",
+  "env": {
+    "jasmine": true
+  },
   "plugins": [
     "standard",
-    "promise"
+    "promise",
+    "jasmine"
   ]
 }

@@ -5,7 +5,8 @@
   "main": "d3-slider.js",
   "scripts": {
     "build": "rimraf dist && cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development node dev-server"
+    "dev": "cross-env NODE_ENV=development node dev-server",
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
@@ -37,11 +38,22 @@
     "eslint": "^3.17.1",
     "eslint-config-standard": "^7.0.1",
     "eslint-loader": "^1.6.3",
+    "eslint-plugin-jasmine": "^2.2.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.5.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage-istanbul-reporter": "^1.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3",
     "node-sass": "^4.5.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.1",
